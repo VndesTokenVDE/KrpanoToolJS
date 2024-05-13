@@ -4,16 +4,14 @@
     <meta charset="UTF-8">
     <title>KrpanoJSTool</title>
     <link rel="stylesheet" href="style.css">
-    <script type='text/javascript' src='../dist/index.umd.js'></script>
+    <script type='text/javascript' src='/dist/index.umd.js'></script>
 </head>
 
 <body>
 <div class="input-wrapper">
-    <span id="tip" style="color: #FFFFFF">上传全景图</span>
+    <span id="tip" style="color: #FFFFFF">Chọn hình</span>
     <input id="imageInput" type="file" accept="image/jpeg">
 </div>
-<div style="color: aquamarine">(代码内自行调节,一般不建议超过2万像素.windows性能较差时,会导致失败.)图片限制:Mac 20000x10000, win: 15000x7500</div>
-
 
 <script type='text/javascript'>
     const krt = new KrpanoTool()
