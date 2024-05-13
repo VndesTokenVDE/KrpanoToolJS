@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KrpanoJSTool</title>
+    <link rel="stylesheet" href="style.css">
+    <script type='text/javascript' src='../dist/index.umd.js'></script>
+</head>
+
+<body>
+<div class="input-wrapper">
+    <span id="tip" style="color: #FFFFFF">上传全景图</span>
+    <input id="imageInput" type="file" accept="image/jpeg">
+</div>
+<div style="color: aquamarine">(代码内自行调节,一般不建议超过2万像素.windows性能较差时,会导致失败.)图片限制:Mac 20000x10000, win: 15000x7500</div>
+
+
+<script type='text/javascript'>
+    const krt = new KrpanoTool()
+    const inputEl = document.getElementById('imageInput')
+    const tipEl = document.getElementById('tip')
+    inputEl.onchange = function (e) {
+        const file = e.target.files[0]
+        tipEl.innerText = 'loading...'
+        krt.makeTiles(file).then(res => {
+            tipEl.innerText = 'finished...'
+            console.log('done')
+            console.log(res)
+            downloadFile(res.content)
+        }).catch(e => {
+            console.log('failed', e)
+            tipEl.innerText = 'error...'
+        }).finally(() => {
+            setTimeout(() => {
+                tipEl.innerText = '上传全景图'
+            }, 1500)
+        })
+        inputEl.value = ''
+    }
+
+    function downloadFile(blob) {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = 'tour';
+        link.href = url;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+</script>
+</body>
+
+</html>
