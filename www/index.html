@@ -41,7 +41,7 @@
     function downloadFile(blob) {
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
-        link.download = '全景图';
+        link.download = 'tour';
         link.href = url;
         document.body.appendChild(link);
         link.click();
